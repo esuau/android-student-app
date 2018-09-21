@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         final Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddStudentActivity.class);
+                Intent intent = new Intent(MainActivity.this, StudentListActivity.class);
                 startActivityForResult(intent, SHOW_STUDENTS_RESULT);
             }
         });
