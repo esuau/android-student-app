@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ADD_STUDENT_RESULT) {
+            setResult(RESULT_OK);
             finish();
         }
     }
+
 }
