@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".AddStudentActivity">
         </activity>
+        <activity android:name=".StudentListActivity">
+        </activity>
     </application>
 
 </manifest>
