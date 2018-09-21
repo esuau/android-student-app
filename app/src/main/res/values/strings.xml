@@ -3,4 +3,17 @@
 
     <string name="main_add_student">Ajouter un étudiant</string>
     <string name="main_show_students">Lister les étudiants</string>
+
+    <string name="field_name">Nom : </string>
+    <string name="field_first_name">Prénom : </string>
+    <string name="field_gender">Sexe : </string>
+    <string name="field_email">Email : </string>
+    <string name="field_birthdate">Date de\nnaissance : </string>
+    <string name="field_group">Groupe : </string>
+    <string name="field_status">Redoublant : </string>
+    <string name="gender_male">Homme</string>
+    <string name="gender_female">Femme</string>
+    <string name="example_birthdate">18/09/1996</string>
+    <string name="example_group">M2 ISIN</string>
+    <string name="button_add">Ajouter</string>
 </resources>
