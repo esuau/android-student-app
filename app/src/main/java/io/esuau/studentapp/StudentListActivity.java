@@ -33,6 +33,7 @@ public class StudentListActivity extends AppCompatActivity {
                 Intent intent = new Intent(StudentListActivity.this, StudentDetailsActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("student", students.get(position));
+                intent.putExtras(b);
                 startActivityForResult(intent, STUDENT_DETAILS_RESULT);
             }
         });
