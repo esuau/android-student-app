@@ -13,7 +13,7 @@
     <string name="field_status">Redoublant : </string>
     <string name="gender_male">Homme</string>
     <string name="gender_female">Femme</string>
-    <string name="example_birthdate">18/09/1996</string>
     <string name="example_group">M2 ISIN</string>
+    <string name="button_birthdate">Choisir une date</string>
     <string name="button_add">Ajouter</string>
 </resources>
