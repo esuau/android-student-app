@@ -18,8 +18,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
 
     private Button datePickerButton;
     private Button addStudentButton;
-
     private TextView textDate;
+    private Date birthDate = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,9 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             String dateStr = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                             textDate.setText(dateStr);
+                            birthDate.setYear(year);
+                            birthDate.setMonth(monthOfYear);
+                            birthDate.setDate(dayOfMonth);
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -73,7 +76,7 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
             boolean status = inputStatus.isChecked();
 
             Students application = (Students) getApplication();
-            application.addStudent(new Student(name, firstName, gender, email, new Date(), group, status));
+            application.addStudent(new Student(name, firstName, gender, email, birthDate, group, status));
 
             Intent intent = new Intent(AddStudentActivity.this, StudentListActivity.class);
             startActivityForResult(intent, STUDENT_LIST_ACTIVITY_RESULT);
