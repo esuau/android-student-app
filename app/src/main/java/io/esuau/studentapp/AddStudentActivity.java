@@ -1,7 +1,9 @@
 package io.esuau.studentapp;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.*;
@@ -12,8 +14,10 @@ import java.util.Date;
 
 public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button datePickerButton;
-    Button addStudentButton;
+    private final int STUDENT_LIST_ACTIVITY_RESULT = 4;
+
+    private Button datePickerButton;
+    private Button addStudentButton;
 
     private TextView textDate;
 
@@ -70,6 +74,18 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
 
             Students application = (Students) getApplication();
             application.addStudent(new Student(name, firstName, gender, email, new Date(), group, status));
+
+            Intent intent = new Intent(AddStudentActivity.this, StudentListActivity.class);
+            startActivityForResult(intent, STUDENT_LIST_ACTIVITY_RESULT);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == STUDENT_LIST_ACTIVITY_RESULT) {
+            setResult(RESULT_OK);
+            finish();
         }
     }
 
