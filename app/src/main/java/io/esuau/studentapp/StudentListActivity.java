@@ -7,25 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import io.esuau.studentapp.definition.Student;
-
-import java.util.LinkedList;
+import io.esuau.studentapp.definition.StudentList;
 
 public class StudentListActivity extends AppCompatActivity {
 
     private final int STUDENT_DETAILS_RESULT = 3;
 
+    private final StudentList students = new StudentList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list);
-        Students application = (Students) getApplication();
-        final LinkedList<Student> students = application.getStudents();
 
-        Student newStudent = getIntent().getParcelableExtra("Student");
-        if (null != newStudent) {
-            students.add(newStudent);
-        }
+        students.addAll((StudentList) getIntent().getParcelableExtra("StudentList"));
 
         StudentAdapter adapter = new StudentAdapter(getApplicationContext(), R.layout.activity_student_list, students);
         ListView studentListView = findViewById(R.id.student_list);
