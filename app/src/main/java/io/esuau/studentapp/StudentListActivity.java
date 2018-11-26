@@ -22,6 +22,11 @@ public class StudentListActivity extends AppCompatActivity {
         Students application = (Students) getApplication();
         final LinkedList<Student> students = application.getStudents();
 
+        Student newStudent = getIntent().getParcelableExtra("Student");
+        if (null != newStudent) {
+            students.add(newStudent);
+        }
+
         StudentAdapter adapter = new StudentAdapter(getApplicationContext(), R.layout.activity_student_list, students);
         ListView studentListView = findViewById(R.id.student_list);
         studentListView.setAdapter(adapter);
@@ -29,9 +34,7 @@ public class StudentListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Intent intent = new Intent(StudentListActivity.this, StudentDetailsActivity.class);
-                Bundle b = new Bundle();
-                b.putSerializable("student", students.get(position));
-                intent.putExtras(b);
+                intent.putExtra("Student", students.get(position));
                 startActivityForResult(intent, STUDENT_DETAILS_RESULT);
             }
         });

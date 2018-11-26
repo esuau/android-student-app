@@ -14,11 +14,7 @@ public class StudentDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_details);
-        Bundle b = getIntent().getExtras();
-        Student student = null;
-        if (b != null) {
-            student = (Student) b.getSerializable("student");
-        }
+        Student student = getIntent().getParcelableExtra("Student");
         if (student != null) {
             TextView studentName = findViewById(R.id.student_name);
             studentName.setText(student.getName());

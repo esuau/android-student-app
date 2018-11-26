@@ -75,10 +75,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
             Switch inputStatus = findViewById(R.id.input_status);
             boolean status = inputStatus.isChecked();
 
-            Students application = (Students) getApplication();
-            application.addStudent(new Student(name, firstName, gender, email, birthDate, group, status));
-
             Intent intent = new Intent(AddStudentActivity.this, StudentListActivity.class);
+            intent.putExtra("Student", new Student(name, firstName, gender, email, birthDate, group, status));
             startActivityForResult(intent, STUDENT_LIST_ACTIVITY_RESULT);
         }
     }
