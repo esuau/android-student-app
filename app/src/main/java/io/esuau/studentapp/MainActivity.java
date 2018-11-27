@@ -55,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ADD_STUDENT_RESULT || resultCode == SHOW_STUDENTS_RESULT) {
-            setResult(RESULT_OK);
-            finish();
+        if (requestCode == ADD_STUDENT_RESULT || requestCode == SHOW_STUDENTS_RESULT) {
+            if (resultCode == RESULT_OK && null != data) {
+                students.clear();
+                students.addAll((StudentList) data.getParcelableExtra("StudentList"));
+            }
         }
     }
 

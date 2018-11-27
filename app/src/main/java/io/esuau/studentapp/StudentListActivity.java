@@ -2,6 +2,7 @@ package io.esuau.studentapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -38,10 +39,14 @@ public class StudentListActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == STUDENT_DETAILS_RESULT) {
-            setResult(RESULT_OK);
-            finish();
-        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(StudentListActivity.this, MainActivity.class);
+        intent.putExtra("StudentList", (Parcelable) students);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 
 }

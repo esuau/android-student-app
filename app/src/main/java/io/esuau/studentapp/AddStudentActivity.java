@@ -3,6 +3,7 @@ package io.esuau.studentapp;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -92,10 +93,20 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == STUDENT_LIST_ACTIVITY_RESULT) {
-            setResult(RESULT_OK);
-            finish();
+        if (requestCode == STUDENT_LIST_ACTIVITY_RESULT) {
+            if (resultCode == RESULT_OK && null != data) {
+                students.clear();
+                students.addAll((StudentList) data.getParcelableExtra("StudentList"));
+            }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddStudentActivity.this, MainActivity.class);
+        intent.putExtra("StudentList", (Parcelable) students);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 
 }
