@@ -3,7 +3,6 @@ package io.esuau.studentapp;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
