@@ -3,11 +3,13 @@ package io.esuau.studentapp;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.*;
 import io.esuau.studentapp.definition.Student;
+import io.esuau.studentapp.definition.StudentList;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +17,8 @@ import java.util.Date;
 public class AddStudentActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final int STUDENT_LIST_ACTIVITY_RESULT = 4;
+
+    private final StudentList students = new StudentList();
 
     private Button datePickerButton;
     private Button addStudentButton;
@@ -25,6 +29,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
+
+        students.addAll((StudentList) getIntent().getParcelableExtra("StudentList"));
 
         textDate = findViewById(R.id.textdate);
 
@@ -75,8 +81,10 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
             Switch inputStatus = findViewById(R.id.input_status);
             boolean status = inputStatus.isChecked();
 
+            students.add(new Student(name, firstName, gender, email, birthDate, group, status));
+
             Intent intent = new Intent(AddStudentActivity.this, StudentListActivity.class);
-            intent.putExtra("Student", new Student(name, firstName, gender, email, birthDate, group, status));
+            intent.putExtra("StudentList", (Parcelable) students);
             startActivityForResult(intent, STUDENT_LIST_ACTIVITY_RESULT);
         }
     }
@@ -84,10 +92,20 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == STUDENT_LIST_ACTIVITY_RESULT) {
-            setResult(RESULT_OK);
-            finish();
+        if (requestCode == STUDENT_LIST_ACTIVITY_RESULT) {
+            if (resultCode == RESULT_OK && null != data) {
+                students.clear();
+                students.addAll((StudentList) data.getParcelableExtra("StudentList"));
+            }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddStudentActivity.this, MainActivity.class);
+        intent.putExtra("StudentList", (Parcelable) students);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 
 }
